@@ -1269,4 +1269,167 @@ const MyComponent = () => {
 };
 ```
 
----
+###🖱️ **Event Handling in React**
+
+🎯 General Context
+
+In a React app, user interaction is a core part of the experience. Whether it's clicking a button, submitting a form, or hovering over an element, React uses event handlers to detect and respond to these interactions — just like vanilla JavaScript, but with a cleaner, component-based approach.
+
+Imagine a music app like Spotify. When you hit "Play", React listens for that event (onClick) and executes a function to start the music. React’s synthetic event system wraps native browser events, providing consistent behavior across all browsers.
+
+Example:
+
+🟢 YouTube’s “Like” Button – When you click the thumbs-up icon, it updates the UI and sends an event to record your like.
+
+🔧 React Code Involved: onClick, onSubmit, onChange
+
+💻 Example Code
+
+```jsx
+import React from "react";
+
+function PlayButton() {
+  const handleClick = () => {
+    alert("Playing your favorite song!");
+  };
+
+  return <button onClick={handleClick}>Play</button>;
+}
+export default PlayButton;
+```
+
+Here, the onClick prop attaches an event handler (handleClick) to the button. When the button is clicked, the function runs.
+
+🧠 **Technical Explanation:**
+
+React handles events using a synthetic event system — it wraps the native DOM events and ensures cross-browser compatibility.
+
+Events in React are named using camelCase: onClick, onChange, onSubmit, etc.
+
+Event handlers are passed as functions, not strings.
+
+You can access the event object like this: handleClick = (e) => { ... }.
+
+Common React events:
+
+onClick – user clicks an element
+
+onChange – form field changes
+
+onSubmit – form is submitted
+
+onMouseEnter, onMouseLeave – mouse events
+
+onKeyDown, onKeyUp – keyboard events
+
+🧲 **React Hooks & Forms**
+
+🎯 **`General Context`**
+
+React Hooks allow functional components to have state and lifecycle features. They make your components more readable, modular, and powerful without needing class components. The two most commonly used hooks are useState() and useEffect().
+
+React Forms are used to collect user input. Combined with hooks, managing input becomes straightforward and intuitive.
+
+🔌 useState – Managing State in Functional Components
+
+Example: 🟢 Instagram Feed Auto Refresh – When a new post is added, the feed updates without a full reload.
+
+🔧 Uses:
+
+useState to store the feed data
+
+useEffect to fetch new posts from the server at intervals
+
+```jsx
+import React, { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>Increment</button>
+    </div>
+  );
+}
+```
+
+Here, useState(0) initializes the state to 0. Clicking the button calls setCount, which updates the state and re-renders the component.
+
+⌛ useEffect – Side Effects Like Fetching Data
+
+```jsx
+import React, { useEffect } from "react";
+
+function Welcome() {
+  useEffect(() => {
+    console.log("Component mounted!");
+  }, []);
+
+  return <h2>Welcome to the app</h2>;
+}
+```
+
+useEffect runs after the component mounts.
+
+The empty array [] makes sure it only runs once (like componentDidMount).
+
+📥 **Handling Forms in React**
+Controlled Input with useState
+
+Example:
+
+🟢 Amazon Sign-In Form – Tracks input fields and validates if email/password are entered correctly.
+
+🔧 Controlled Inputs:
+
+useState for managing email/password values
+
+onChange for real-time updates
+
+onSubmit for login handling
+
+```jsx
+import React, { useState } from "react";
+
+function ContactForm() {
+  const [name, setName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    alert(`Submitted: ${name}`);
+  };
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <label>
+        Name:
+        <input
+          type="text"
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+  );
+}
+```
+
+🧠 **Technical Explanation**
+useState() lets you store form values in state and update them via input events.
+
+Controlled components are form elements (like <input>) whose value is controlled by React state.
+
+onChange handlers capture user input and update the state.
+
+Hooks also include:
+
+useEffect – side effects like API calls
+
+useContext – global state via context API
+
+useRef – reference DOM elements
+
+## useReducer, useMemo, etc.
